@@ -23,7 +23,7 @@ interface CartCtx {
 }
 
 const Ctx = createContext<CartCtx | null>(null)
-const KEY = 'atelier-noir:cart:v1'
+const KEY = 'clawkie:cart:v1'
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])

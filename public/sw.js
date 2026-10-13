@@ -1,11 +1,11 @@
-/* Atelier Noir service worker
+/* clawkie service worker
  * - precaches the offline fallback + icons
  * - cache-first for immutable build assets and static files
  * - navigations: network only, falling back to the offline page when there is no connection
  * - HTML is never cached, so no signed-in / private page content is ever stored
  */
 const VERSION = 'v1'
-const STATIC_CACHE = `an-static-${VERSION}`
+const STATIC_CACHE = `ck-static-${VERSION}`
 const PRECACHE = ['/offline.html', '/icons/icon-192.png', '/icons/icon-512.png']
 
 self.addEventListener('install', (event) => {
