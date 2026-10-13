@@ -31,7 +31,7 @@ export default function BakeryCatalog({ products }: { products: Product[] }) {
       <div className="no-scrollbar -mx-gutter flex gap-3 overflow-x-auto px-gutter py-2 md:mx-0 md:px-1">
         {categories.map((c) => (
           <button key={c} onClick={() => setCat(c)} aria-pressed={cat === c}
-            className={`shrink-0 rounded-full bg-canvas px-4 py-2 font-display text-label-md transition ${cat === c ? 'is-pressed' : 'text-slate shadow-neo-pill'}`}>
+            className={`shrink-0 rounded-md border px-4 py-2 font-display text-label-md transition-colors ${cat === c ? 'is-pressed border-ink' : 'border-ink/10 bg-surface text-ink/70 hover:bg-ink/5'}`}>
             {c}{c === 'All' ? ` (${products.length})` : ''}
           </button>
         ))}
@@ -45,7 +45,7 @@ export default function BakeryCatalog({ products }: { products: Product[] }) {
             const soldOut = p.stock <= 0
             const qty = cart.qtyOf(p.id)
             return (
-              <article key={p.id} className={`neo-card flex flex-col gap-4 p-4 ${soldOut ? 'opacity-80' : ''}`}>
+              <article key={p.id} className={`neo-card group flex flex-col gap-4 p-4 transition-colors hover:bg-ink/[0.02] ${soldOut ? 'opacity-80' : ''}`}>
                 <div className="relative">
                   <Thumb src={p.image_url} alt={p.name} />
                   {p.badge && !soldOut && (

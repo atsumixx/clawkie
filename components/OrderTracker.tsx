@@ -15,7 +15,7 @@ export default function OrderTracker({ status, method }: { status: OrderStatus; 
         const done = i <= idx
         return (
           <li key={s.key} className="flex flex-1 flex-col items-center gap-2 text-center" aria-current={i === idx ? 'step' : undefined}>
-            <span className={`flex h-10 w-10 items-center justify-center rounded-full ${done ? 'bg-ink text-hi shadow-neo-ink' : 'bg-canvas text-slate shadow-neo-btn'}`}>
+            <span className={`flex h-10 w-10 items-center justify-center rounded-full ${done ? 'bg-ink text-cream shadow-sm' : 'bg-sage/40 text-ink/60'}`}>
               <s.Icon size={16} />
             </span>
             <span className={`font-display text-label-sm ${done ? 'text-ink' : 'text-slate'}`}>{s.label}</span>

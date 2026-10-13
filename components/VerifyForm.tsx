@@ -5,7 +5,11 @@ import { resendCode, verifyEmail, type AuthState } from '@/app/actions/auth'
 
 function Submit({ label, ink = true }: { label: string; ink?: boolean }) {
   const { pending } = useFormStatus()
-  return <button className={`${ink ? 'neo-btn-ink' : 'neo-btn'} w-full`} disabled={pending}>{pending ? 'One moment…' : label}</button>
+  return (
+    <button className={`${ink ? 'neo-btn-ink' : 'neo-btn'} w-full ${pending ? 'btn-loading' : ''}`} disabled={pending} aria-busy={pending || undefined}>
+      <span className="btn-label">{pending ? 'One moment…' : label}</span>
+    </button>
+  )
 }
 
 export default function VerifyForm({ email, next }: { email: string; next: string }) {

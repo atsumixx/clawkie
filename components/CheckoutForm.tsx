@@ -51,7 +51,7 @@ export default function CheckoutForm({ defaultName, defaultPhone }: { defaultNam
   }
 
   const seg = (active: boolean) =>
-    `flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 font-display text-label-md transition ${active ? 'bg-canvas shadow-neo-btn text-ink' : 'text-slate'}`
+    `flex flex-1 items-center justify-center gap-2 rounded-md px-4 py-3 font-display text-label-md transition-colors ${active ? 'bg-ink text-cream' : 'text-ink/70 hover:bg-ink/5'}`
 
   return (
     <form onSubmit={onSubmit} className="grid gap-8 lg:grid-cols-[1fr_24rem]">
@@ -60,7 +60,7 @@ export default function CheckoutForm({ defaultName, defaultPhone }: { defaultNam
 
         <section className="neo-card flex flex-col gap-4 p-6">
           <h2 className="font-display text-headline-sm">Fulfillment</h2>
-          <div role="radiogroup" aria-label="Fulfillment method" className="neo-inset flex gap-1 rounded-full p-1.5">
+          <div role="radiogroup" aria-label="Fulfillment method" className="neo-inset flex gap-1 rounded-md p-1.5">
             <button type="button" role="radio" aria-checked={method === 'pickup'} onClick={() => setMethod('pickup')} className={seg(method === 'pickup')}><Store size={16} /> Pickup</button>
             <button type="button" role="radio" aria-checked={method === 'delivery'} onClick={() => setMethod('delivery')} className={seg(method === 'delivery')}><Bike size={16} /> Delivery</button>
           </div>
@@ -105,7 +105,9 @@ export default function CheckoutForm({ defaultName, defaultPhone }: { defaultNam
         </div>
         <p className="mt-2 text-body-sm text-slate">Payment is collected on {method === 'pickup' ? 'pickup' : 'delivery'}.</p>
         {error && <p role="alert" className="neo-inset mt-4 rounded-2xl px-4 py-3 text-body-sm text-danger">{error}</p>}
-        <button className="neo-btn-ink mt-5 w-full" disabled={pending}>{pending ? 'Placing order…' : `Place order · ${money(cart.subtotal)}`}</button>
+        <button className={`neo-btn-ink mt-5 w-full ${pending ? 'btn-loading' : ''}`} disabled={pending} aria-busy={pending || undefined}>
+          <span className="btn-label">{pending ? 'Placing order…' : `Place order · ${money(cart.subtotal)}`}</span>
+        </button>
         <Link href="/cart" className="mt-3 block text-center font-display text-label-md text-slate underline underline-offset-4">Back to cart</Link>
       </aside>
     </form>

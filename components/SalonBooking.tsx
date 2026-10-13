@@ -76,15 +76,15 @@ export default function SalonBooking({ services, staff, days, signedIn }: {
               const on = s.id === serviceId
               return (
                 <button key={s.id} type="button" aria-pressed={on} onClick={() => setServiceId(s.id)}
-                  className={`flex flex-col gap-3 rounded-lg bg-canvas p-5 text-left transition ${on ? 'shadow-neo-inset' : 'shadow-neo-raised'}`}>
+                  className={`flex flex-col gap-3 rounded-lg border p-5 text-left transition-colors ${on ? 'border-ink bg-ink text-cream' : 'border-ink/10 bg-surface shadow-xs hover:bg-ink/5'}`}>
                   <div className="flex items-start justify-between gap-3">
                     <h3 className="font-display text-headline-sm">{s.name}</h3>
                     <div className="shrink-0 text-right">
                       <div className="font-display text-headline-sm">{money(s.price)}</div>
-                      <div className="text-body-sm text-slate">{s.duration_minutes} min</div>
+                      <div className={`text-body-sm ${on ? 'text-cream/75' : 'text-slate'}`}>{s.duration_minutes} min</div>
                     </div>
                   </div>
-                  <p className="text-body-sm text-slate">{s.description}</p>
+                  <p className={`text-body-sm ${on ? 'text-cream/75' : 'text-slate'}`}>{s.description}</p>
                   {s.tags.length > 0 && <div className="flex flex-wrap gap-2">{s.tags.map((t) => <span key={t} className="neo-chip">{t}</span>)}</div>}
                 </button>
               )
@@ -100,10 +100,10 @@ export default function SalonBooking({ services, staff, days, signedIn }: {
               const on = p.id === staffId
               return (
                 <button key={p.id ?? 'any'} type="button" aria-pressed={on} onClick={() => setStaffId(p.id)}
-                  className={`flex items-center justify-between gap-2 rounded-lg bg-canvas p-4 text-left transition ${on ? 'shadow-neo-inset' : 'shadow-neo-raised'}`}>
+                  className={`flex items-center justify-between gap-2 rounded-lg border p-4 text-left transition-colors ${on ? 'border-ink bg-ink text-cream' : 'border-ink/10 bg-surface shadow-xs hover:bg-ink/5'}`}>
                   <span>
                     <span className="block font-display text-headline-sm">{p.name}</span>
-                    <span className="block text-body-sm text-slate">{p.title}</span>
+                    <span className={`block text-body-sm ${on ? 'text-cream/75' : 'text-slate'}`}>{p.title}</span>
                   </span>
                   {on && <Check size={18} />}
                 </button>
@@ -120,7 +120,7 @@ export default function SalonBooking({ services, staff, days, signedIn }: {
               const on = d.date === date
               return (
                 <button key={d.date} type="button" aria-pressed={on} onClick={() => setDate(d.date)}
-                  className={`flex h-24 w-16 shrink-0 flex-col items-center justify-center rounded-full bg-canvas font-display transition ${on ? 'shadow-neo-pill-inset text-ink' : 'shadow-neo-btn text-slate'}`}>
+                  className={`flex h-24 w-16 shrink-0 flex-col items-center justify-center rounded-lg border font-display transition-colors ${on ? 'border-ink bg-ink text-cream' : 'border-ink/10 bg-surface text-ink/70 hover:bg-ink/5'}`}>
                   <span className="text-label-sm uppercase">{d.weekday}</span>
                   <span className="text-headline-md">{d.day}</span>
                 </button>
@@ -144,8 +144,8 @@ export default function SalonBooking({ services, staff, days, signedIn }: {
             <div className="grid grid-cols-3 gap-3 md:grid-cols-4">
               {slots.map((s) => (
                 <button key={s.time} type="button" disabled={!s.available} aria-pressed={s.time === time} onClick={() => setTime(s.time)}
-                  className={`rounded-full bg-canvas py-3 font-display text-label-md transition ${
-                    !s.available ? 'pointer-events-none opacity-40 line-through' : s.time === time ? 'is-pressed' : 'shadow-neo-btn'}`}>
+                  className={`rounded-md border px-3 py-3 font-display text-label-md transition-colors ${
+                    !s.available ? 'pointer-events-none border-ink/10 bg-sage/30 text-ink/40 line-through' : s.time === time ? 'is-pressed border-ink' : 'border-ink/15 bg-surface hover:bg-ink/5'}`}>
                   {s.label}
                 </button>
               ))}
@@ -175,8 +175,8 @@ export default function SalonBooking({ services, staff, days, signedIn }: {
         </dl>
         <p className="neo-inset mt-4 flex gap-2 rounded-2xl p-3 text-body-sm text-slate"><Info size={16} className="mt-0.5 shrink-0" />Your booking starts as <b className="mx-1 text-ink">pending</b> until the studio confirms it. Pay at the studio.</p>
         {error && <p role="alert" className="neo-inset mt-4 rounded-2xl px-4 py-3 text-body-sm text-danger">{error}</p>}
-        <button className="neo-btn-ink mt-5 w-full" disabled={!service || !time || pending} onClick={reserve}>
-          {pending ? 'Reserving…' : signedIn ? 'Reserve time slot' : 'Sign in to reserve'}
+        <button className={`neo-btn-ink mt-5 w-full ${pending ? 'btn-loading' : ''}`} disabled={!service || !time || pending} onClick={reserve} aria-busy={pending || undefined}>
+          <span className="btn-label">{pending ? 'Reserving…' : signedIn ? 'Reserve time slot' : 'Sign in to reserve'}</span>
         </button>
         {!signedIn && <p className="mt-3 text-center text-body-sm text-slate">No account? <Link className="underline underline-offset-4" href="/signup?next=/salon">Create one</Link></p>}
       </aside>

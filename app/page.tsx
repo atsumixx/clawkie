@@ -17,20 +17,21 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col gap-10">
-      {/* Hero: the cow-spot banner with a sticker card on top */}
-      <section className="neo-card relative overflow-hidden">
-        <div aria-hidden className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/brand/cow-banner.jpg')" }} />
-        <div className="relative flex justify-center px-4 py-12 md:py-20">
-          <div className="neo-float flex max-w-xl flex-col gap-3 px-6 py-8 text-center md:px-10">
-            <h1 className="outline-text font-display text-display-lg-mobile md:text-display-lg">Made fresh daily.<br />Nails by appointment.</h1>
-            <p className="font-hand text-[21px] leading-6 text-slate">One little shop, two crafts. Order today’s bake or reserve a seat at the studio.</p>
+      <section className="rounded-lg border border-ink/10 bg-sage/50 px-6 py-12 text-center sm:px-8 md:py-16">
+        <div className="mx-auto max-w-3xl">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.08em] text-ink/55">clawkie · nail studio & bakery</p>
+          <h1 className="text-4xl font-semibold sm:text-6xl">Nails you&apos;ll love.<br />Cookies you&apos;ll crave.</h1>
+          <p className="mx-auto mt-5 max-w-md text-base text-ink/70">Book a nail appointment or order fresh-baked treats for pick-up or delivery.</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link href="/salon" className="neo-btn-ink px-6 py-3">Book nails</Link>
+            <Link href="/bakery" className="neo-btn px-6 py-3">Shop bakes</Link>
           </div>
         </div>
       </section>
 
       <section className="grid gap-6 md:grid-cols-2">
-        <Link href="/bakery" className="neo-card group flex flex-col gap-6 p-6 transition active:translate-x-[3px] active:translate-y-[3px] active:shadow-neo-press">
-          <span className="flex h-24 w-24 items-center justify-center rounded-full shadow-neo-inset">
+        <Link href="/bakery" className="neo-card group flex flex-col gap-6 p-6 transition-colors hover:bg-ink/[0.02]">
+          <span className="flex h-24 w-24 items-center justify-center rounded-lg bg-tan/60">
             <Image src="/brand/cookie-cart-logo.png" alt="" width={480} height={445} className="h-16 w-16 object-contain" />
           </span>
           <div>
@@ -39,8 +40,8 @@ export default async function Home() {
           </div>
           <span className="neo-btn self-start">Order now <ArrowRight size={16} /></span>
         </Link>
-        <Link href="/salon" className="neo-card group flex flex-col gap-6 p-6 transition active:translate-x-[3px] active:translate-y-[3px] active:shadow-neo-press">
-          <span className="flex h-24 w-24 items-center justify-center rounded-full shadow-neo-inset">
+        <Link href="/salon" className="neo-card group flex flex-col gap-6 p-6 transition-colors hover:bg-ink/[0.02]">
+          <span className="flex h-24 w-24 items-center justify-center rounded-lg bg-sage/50">
             <Image src="/brand/clawsette-logo.png" alt="" width={480} height={392} className="h-16 w-16 object-contain" />
           </span>
           <div>
@@ -55,11 +56,11 @@ export default async function Home() {
         <section className="flex flex-col gap-4">
           <div className="flex items-end justify-between">
             <h2 className="font-display text-headline-md">Fresh from the oven</h2>
-            <Link href="/bakery" className="font-hand text-[20px] font-bold text-slate underline underline-offset-4">All bakes</Link>
+            <Link href="/bakery" className="text-sm font-medium text-ink/70 underline underline-offset-4 hover:text-ink">All bakes</Link>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {(products as Product[]).map((p) => (
-              <Link key={p.id} href="/bakery" className="neo-card flex flex-col gap-3 p-4">
+              <Link key={p.id} href="/bakery" className="neo-card group flex flex-col gap-3 p-4 transition-colors hover:bg-ink/[0.02]">
                 <Thumb src={p.image_url} alt={p.name} className="h-40" />
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="font-display text-headline-sm">{p.name}</h3>
@@ -75,11 +76,11 @@ export default async function Home() {
         <section className="flex flex-col gap-4">
           <div className="flex items-end justify-between">
             <h2 className="font-display text-headline-md">At the studio</h2>
-            <Link href="/salon" className="font-hand text-[20px] font-bold text-slate underline underline-offset-4">All services</Link>
+            <Link href="/salon" className="text-sm font-medium text-ink/70 underline underline-offset-4 hover:text-ink">All services</Link>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {(services as Service[]).map((s) => (
-              <Link key={s.id} href="/salon" className="neo-card flex flex-col gap-2 p-5">
+              <Link key={s.id} href="/salon" className="neo-card group flex flex-col gap-2 p-5 transition-colors hover:bg-ink/[0.02]">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="font-display text-headline-sm">{s.name}</h3>
                   <span className="font-display text-headline-sm">{money(s.price)}</span>

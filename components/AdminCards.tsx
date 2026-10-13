@@ -3,6 +3,7 @@ import { setAppointmentStatus, setOrderStatus } from '@/app/actions/admin'
 import { dateTime, money, orderRef, shortDate, statusLabel } from '@/lib/format'
 import type { Appointment, Order, OrderStatus } from '@/lib/types'
 import Status from './Status'
+import ActionButton from './ActionButton'
 
 export function OrderCard({ order }: { order: Order }) {
   const stages: OrderStatus[] = order.fulfillment_method === 'delivery'
@@ -39,16 +40,16 @@ export function OrderCard({ order }: { order: Order }) {
         <div className="neo-inset flex flex-wrap gap-1 rounded-full p-1">
           {stages.map((s) => (
             <form key={s} action={setOrderStatus.bind(null, order.id, s)} className="flex-1">
-              <button disabled={order.status === s || order.status === 'cancelled'}
-                className={`w-full rounded-full px-3 py-2 font-display text-label-md ${order.status === s ? 'bg-canvas shadow-neo-btn text-ink' : 'text-slate hover:text-ink'}`}>
+              <ActionButton disabled={order.status === s || order.status === 'cancelled'}
+                className={`relative w-full rounded-md px-3 py-2 font-display text-label-md transition-colors ${order.status === s ? 'bg-ink text-cream' : 'text-ink/70 hover:bg-ink/5 hover:text-ink'}`}>
                 {statusLabel[s]}
-              </button>
+              </ActionButton>
             </form>
           ))}
         </div>
         {!closed && (
           <form action={setOrderStatus.bind(null, order.id, 'cancelled')} className="mt-3">
-            <button className="font-display text-label-md text-danger underline underline-offset-4">Cancel order (restocks items)</button>
+            <ActionButton className="relative font-display text-label-md text-danger underline underline-offset-4">Cancel order (restocks items)</ActionButton>
           </form>
         )}
       </div>
@@ -82,20 +83,20 @@ export function AppointmentCard({ appt }: { appt: Appointment }) {
         {appt.status === 'pending' && (
           <>
             <form action={setAppointmentStatus.bind(null, appt.id, 'cancelled')} className="flex-1">
-              <button className="neo-btn w-full"><X size={16} /> Decline</button>
+              <ActionButton className="neo-btn w-full"><X size={16} /> Decline</ActionButton>
             </form>
             <form action={setAppointmentStatus.bind(null, appt.id, 'confirmed')} className="flex-1">
-              <button className="neo-btn-ink w-full"><Check size={16} /> Confirm</button>
+              <ActionButton className="neo-btn-ink w-full"><Check size={16} /> Confirm</ActionButton>
             </form>
           </>
         )}
         {appt.status === 'confirmed' && (
           <>
             <form action={setAppointmentStatus.bind(null, appt.id, 'cancelled')} className="flex-1">
-              <button className="neo-btn w-full"><X size={16} /> Cancel</button>
+              <ActionButton className="neo-btn w-full"><X size={16} /> Cancel</ActionButton>
             </form>
             <form action={setAppointmentStatus.bind(null, appt.id, 'completed')} className="flex-1">
-              <button className="neo-btn-ink w-full"><Check size={16} /> Mark completed</button>
+              <ActionButton className="neo-btn-ink w-full"><Check size={16} /> Mark completed</ActionButton>
             </form>
           </>
         )}

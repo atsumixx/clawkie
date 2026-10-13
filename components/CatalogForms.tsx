@@ -1,5 +1,6 @@
 import { saveProduct, saveService } from '@/app/actions/admin'
 import type { Product, Service } from '@/lib/types'
+import ActionButton from './ActionButton'
 
 const Field = ({ label, children }: { label: string; children: React.ReactNode }) => (
   <label className="block"><span className="neo-label">{label}</span>{children}</label>
@@ -20,7 +21,7 @@ export function ProductForm({ p }: { p?: Product }) {
         <input type="checkbox" name="is_available" defaultChecked={p?.is_available ?? true} className="h-5 w-5 accent-ink" />
         <span className="text-body-md">Available to customers</span>
       </label>
-      <div className="sm:col-span-2"><button className="neo-btn-ink">{p ? 'Save changes' : 'Add product'}</button></div>
+      <div className="sm:col-span-2"><ActionButton className="neo-btn-ink">{p ? 'Save changes' : 'Add product'}</ActionButton></div>
     </form>
   )
 }
@@ -38,7 +39,7 @@ export function ServiceForm({ s }: { s?: Service }) {
         <input type="checkbox" name="is_available" defaultChecked={s?.is_available ?? true} className="h-5 w-5 accent-ink" />
         <span className="text-body-md">Open for booking</span>
       </label>
-      <div className="sm:col-span-2"><button className="neo-btn-ink">{s ? 'Save changes' : 'Add service'}</button></div>
+      <div className="sm:col-span-2"><ActionButton className="neo-btn-ink">{s ? 'Save changes' : 'Add service'}</ActionButton></div>
     </form>
   )
 }

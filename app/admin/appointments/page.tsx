@@ -20,7 +20,7 @@ export default async function AdminAppointments({ searchParams }: { searchParams
       <div className="no-scrollbar -mx-gutter flex gap-3 overflow-x-auto px-gutter py-2 md:mx-0 md:px-1">
         {FILTERS.map((f) => (
           <Link key={f} href={`/admin/appointments?status=${f}`}
-            className={`shrink-0 rounded-full bg-canvas px-4 py-2 font-display text-label-md ${status === f ? 'is-pressed' : 'text-slate shadow-neo-pill'}`}>{f}</Link>
+            className={`shrink-0 rounded-md border px-4 py-2 font-display text-label-md transition-colors ${status === f ? 'is-pressed border-ink' : 'border-ink/10 bg-surface text-ink/70 hover:bg-ink/5'}`}>{f}</Link>
         ))}
       </div>
       {appts.length === 0 ? <p className="neo-inset rounded-lg p-6 text-center text-slate">Nothing here.</p> : (

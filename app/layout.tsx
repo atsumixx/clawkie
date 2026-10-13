@@ -1,14 +1,17 @@
 import type { Metadata, Viewport } from 'next'
-import { Fredoka, Gaegu, Nunito } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import { BRAND } from '@/lib/config'
 import { CartProvider } from '@/components/CartProvider'
 import Header from '@/components/Header'
 import RegisterSW from '@/components/RegisterSW'
 
-const display = Fredoka({ subsets: ['latin'], variable: '--font-display', display: 'swap' })
-const body = Nunito({ subsets: ['latin'], variable: '--font-body', display: 'swap' })
-const hand = Gaegu({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-hand', display: 'swap' })
+const sans = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-sans',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: { default: `${BRAND} — Bakery & Nail Studio`, template: `%s · ${BRAND}` },
@@ -20,7 +23,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#F6F4EF',
+  themeColor: '#FBF6EF',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -28,7 +31,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${hand.variable}`}>
+    <html lang="en" className={sans.variable}>
       <body className="min-h-screen">
         <CartProvider>
           <Header />

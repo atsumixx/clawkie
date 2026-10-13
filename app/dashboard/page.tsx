@@ -97,9 +97,9 @@ export default async function Dashboard({ searchParams }: { searchParams: { tab?
         <div className="flex items-end justify-between">
           <h2 className="font-display text-headline-md">Activity archive</h2>
         </div>
-        <div className="neo-inset flex rounded-full p-1.5 md:w-96">
-          <Link href="/dashboard" className={`flex flex-1 items-center justify-center gap-2 rounded-full py-2.5 font-display text-label-md ${tab === 'orders' ? 'bg-canvas shadow-neo-btn' : 'text-slate'}`}><Croissant size={14} /> Bakery orders</Link>
-          <Link href="/dashboard?tab=appointments" className={`flex flex-1 items-center justify-center gap-2 rounded-full py-2.5 font-display text-label-md ${tab === 'appointments' ? 'bg-canvas shadow-neo-btn' : 'text-slate'}`}><Sparkles size={14} /> Appointments</Link>
+        <div className="neo-inset flex rounded-md p-1.5 md:w-96">
+          <Link href="/dashboard" className={`flex flex-1 items-center justify-center gap-2 rounded-md py-2.5 font-display text-label-md transition-colors ${tab === 'orders' ? 'bg-ink text-cream' : 'text-ink/70 hover:bg-ink/5'}`}><Croissant size={14} /> Bakery orders</Link>
+          <Link href="/dashboard?tab=appointments" className={`flex flex-1 items-center justify-center gap-2 rounded-md py-2.5 font-display text-label-md transition-colors ${tab === 'appointments' ? 'bg-ink text-cream' : 'text-ink/70 hover:bg-ink/5'}`}><Sparkles size={14} /> Appointments</Link>
         </div>
 
         <ul className="flex flex-col gap-4">

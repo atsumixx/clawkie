@@ -16,7 +16,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     <div className="flex flex-col gap-8">
       <nav aria-label="Admin" className="no-scrollbar -mx-gutter flex gap-3 overflow-x-auto px-gutter py-2 md:mx-0 md:px-1">
         {links.map((l) => (
-          <Link key={l.href} href={l.href} className="neo-btn neo-btn-sm shrink-0">{l.label}</Link>
+          <Link key={l.href} href={l.href} className="neo-btn neo-btn-sm shrink-0 active:scale-[0.97]">{l.label}</Link>
         ))}
       </nav>
       {children}

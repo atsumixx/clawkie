@@ -12,14 +12,14 @@ export default function BottomNav({ isAdmin, signedIn }: { isAdmin: boolean; sig
     ...(isAdmin ? [{ href: '/admin', label: 'Studio', Icon: ShieldCheck }] : []),
   ]
   return (
-    <nav aria-label="Primary" className="pb-safe fixed inset-x-0 bottom-0 z-40 bg-canvas/90 backdrop-blur-xl md:hidden">
+    <nav aria-label="Primary" className="pb-safe fixed inset-x-0 bottom-0 z-40 border-t border-ink/10 bg-cream/90 backdrop-blur-md md:hidden">
       <ul className="flex items-center justify-around px-3 py-2.5">
         {items.map(({ href, label, Icon }) => {
           const active = path === href || path.startsWith(href + '/')
           return (
             <li key={href}>
               <Link href={href} aria-current={active ? 'page' : undefined}
-                className={`flex h-14 w-[4.5rem] flex-col items-center justify-center gap-1 rounded-full font-display text-label-sm transition ${active ? 'shadow-neo-pill-inset text-ink' : 'shadow-neo-btn text-slate'}`}>
+                className={`flex h-14 w-[4.5rem] flex-col items-center justify-center gap-1 rounded-md font-display text-label-sm transition-colors ${active ? 'bg-ink text-cream' : 'text-ink/70 hover:bg-ink/5 hover:text-ink'}`}>
                 <Icon size={18} />
                 {label}
               </Link>

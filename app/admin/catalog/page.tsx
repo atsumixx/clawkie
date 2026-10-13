@@ -3,6 +3,7 @@ import { Pencil, Plus, Trash2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { deleteProduct, deleteService, toggleProduct, toggleService } from '@/app/actions/admin'
 import { ProductForm, ServiceForm } from '@/components/CatalogForms'
+import ActionButton from '@/components/ActionButton'
 import { LOW_STOCK_THRESHOLD } from '@/lib/config'
 import { money } from '@/lib/format'
 import type { Product, Service } from '@/lib/types'
@@ -12,10 +13,10 @@ export const metadata = { title: 'Catalog' }
 function Switch({ on, action, label }: { on: boolean; action: () => Promise<void>; label: string }) {
   return (
     <form action={action}>
-      <button role="switch" aria-checked={on} aria-label={label}
+      <ActionButton role="switch" aria-checked={on} aria-label={label}
         className={`neo-inset relative h-8 w-14 rounded-full transition`}>
         <span className={`absolute top-1 h-6 w-6 rounded-full transition-all ${on ? 'left-7 bg-ink' : 'left-1 bg-slate/60'}`} />
-      </button>
+      </ActionButton>
     </form>
   )
 }
@@ -34,12 +35,12 @@ export default async function AdminCatalog({ searchParams }: { searchParams: { t
     <div className="flex flex-col gap-6">
       <h1 className="font-display text-headline-lg-mobile md:text-headline-lg">Catalog</h1>
 
-      {searchParams.error && <p role="alert" className="neo-inset rounded-2xl px-4 py-3 text-body-md text-danger">{searchParams.error}</p>}
-      {searchParams.saved && <p role="status" className="neo-inset rounded-2xl px-4 py-3 text-body-md">Saved.</p>}
+      {searchParams.error && <p key={searchParams.error} role="alert" className="neo-inset animate-in rounded-2xl px-4 py-3 text-body-md text-danger">{searchParams.error}</p>}
+      {searchParams.saved && <p key={searchParams.saved} role="status" className="neo-inset animate-in rounded-2xl px-4 py-3 text-body-md">Saved.</p>}
 
       <div className="neo-inset flex rounded-full p-1.5 md:w-96">
-        <Link href="/admin/catalog" className={`flex-1 rounded-full py-2.5 text-center font-display text-label-md ${tab === 'products' ? 'bg-canvas shadow-neo-btn' : 'text-slate'}`}>Bakery products</Link>
-        <Link href="/admin/catalog?tab=services" className={`flex-1 rounded-full py-2.5 text-center font-display text-label-md ${tab === 'services' ? 'bg-canvas shadow-neo-btn' : 'text-slate'}`}>Salon services</Link>
+        <Link href="/admin/catalog" className={`flex-1 rounded-md py-2.5 text-center font-display text-label-md transition-colors ${tab === 'products' ? 'bg-ink text-cream' : 'text-ink/70 hover:bg-ink/5'}`}>Bakery products</Link>
+        <Link href="/admin/catalog?tab=services" className={`flex-1 rounded-md py-2.5 text-center font-display text-label-md transition-colors ${tab === 'services' ? 'bg-ink text-cream' : 'text-ink/70 hover:bg-ink/5'}`}>Salon services</Link>
       </div>
 
       <details className="neo-card group p-5">
@@ -64,7 +65,7 @@ export default async function AdminCatalog({ searchParams }: { searchParams: { t
               <summary className="flex cursor-pointer list-none items-center gap-2 font-display text-label-md text-slate"><Pencil size={14} /> Edit</summary>
               <div className="mt-4"><ProductForm p={x} /></div>
               <form action={deleteProduct.bind(null, x.id)} className="mt-4">
-                <button className="flex items-center gap-1.5 font-display text-label-md text-danger"><Trash2 size={14} /> Delete product</button>
+                <ActionButton className="text-danger"><Trash2 size={14} /> Delete product</ActionButton>
               </form>
             </details>
           </li>
@@ -81,7 +82,7 @@ export default async function AdminCatalog({ searchParams }: { searchParams: { t
               <summary className="flex cursor-pointer list-none items-center gap-2 font-display text-label-md text-slate"><Pencil size={14} /> Edit</summary>
               <div className="mt-4"><ServiceForm s={x} /></div>
               <form action={deleteService.bind(null, x.id)} className="mt-4">
-                <button className="flex items-center gap-1.5 font-display text-label-md text-danger"><Trash2 size={14} /> Delete service</button>
+                <ActionButton className="text-danger"><Trash2 size={14} /> Delete service</ActionButton>
               </form>
             </details>
           </li>

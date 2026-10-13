@@ -7,7 +7,11 @@ import { NewPasswordFields, PasswordInput } from './PasswordFields'
 
 function Submit({ label, disabled }: { label: string; disabled?: boolean }) {
   const { pending } = useFormStatus()
-  return <button className="neo-btn-ink w-full" disabled={pending || disabled}>{pending ? 'One moment…' : label}</button>
+  return (
+    <button className={`neo-btn-ink w-full ${pending ? 'btn-loading' : ''}`} disabled={pending || disabled} aria-busy={pending || undefined}>
+      <span className="btn-label">{pending ? 'One moment…' : label}</span>
+    </button>
+  )
 }
 
 export default function AuthForm({ mode, next }: { mode: 'login' | 'signup'; next: string }) {
