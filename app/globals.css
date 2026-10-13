@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-canvas text-ink font-body text-body-md antialiased; overscroll-behavior-y: none; }
+  :focus-visible { outline: 2px solid #121316; outline-offset: 3px; border-radius: 12px; }
+  ::selection { background: #121316; color: #fff; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+}
+
+@layer components {
+  /* Convex surfaces */
+  .neo-card { @apply rounded-lg bg-canvas shadow-neo-raised; }
+  .neo-float { @apply rounded-lg bg-canvas shadow-neo-float; }
+  /* Concave surfaces */
+  .neo-inset { @apply bg-canvas shadow-neo-inset; }
+  /* Chips / badges */
+  .neo-chip { @apply inline-flex items-center gap-1.5 rounded-full bg-canvas px-3 py-1.5 font-display text-label-sm text-slate shadow-neo-pill; }
+  .neo-chip-inset { @apply inline-flex items-center gap-1.5 rounded-full bg-canvas px-3 py-1.5 font-display text-label-sm text-slate shadow-neo-pill-inset; }
+  /* Buttons */
+  .neo-btn { @apply inline-flex items-center justify-center gap-2 rounded-full bg-canvas px-5 py-3 font-display text-label-lg text-ink shadow-neo-btn transition duration-100 active:scale-[0.98] active:shadow-neo-pill-inset disabled:pointer-events-none disabled:opacity-40; }
+  .neo-btn-ink { @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-3.5 font-display text-label-lg text-hi shadow-neo-ink transition duration-100 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-40; }
+  .neo-btn-sm { @apply px-4 py-2 text-label-md; }
+  .neo-icon-btn { @apply inline-flex h-10 w-10 items-center justify-center rounded-full bg-canvas text-slate shadow-neo-btn transition duration-100 hover:text-ink active:scale-[0.97] active:shadow-neo-pill-inset disabled:pointer-events-none disabled:opacity-40; }
+  /* Selected / pressed state for chips, tiles & segmented thumbs */
+  .is-pressed { @apply shadow-neo-pill-inset text-ink !important; }
+  /* Fields */
+  .neo-input { @apply w-full rounded-2xl bg-canvas px-4 py-3 text-body-md text-ink shadow-neo-inset outline-none placeholder:text-slate focus:ring-1 focus:ring-slate; }
+  .neo-label { @apply mb-1.5 block px-1 font-display text-label-sm uppercase text-slate; }
+  .neo-heading { @apply font-display; }
+}

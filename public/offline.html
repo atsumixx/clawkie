@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#ECEEF2" />
+<title>Offline · Atelier Noir</title>
+<style>
+  :root { --canvas:#ECEEF2; --ink:#121316; --slate:#636874; }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--canvas); color:var(--ink);
+         font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; padding:24px; }
+  .card { max-width:360px; width:100%; padding:36px 28px; border-radius:32px; text-align:center; background:var(--canvas);
+          box-shadow: 12px 12px 24px #BAC0CD, -12px -12px 24px #FFFFFF; }
+  .dot { width:64px; height:64px; margin:0 auto 20px; border-radius:50%; display:grid; place-items:center;
+         box-shadow: inset 4px 4px 8px #BAC0CD, inset -4px -4px 8px #FFFFFF; font-size:26px; }
+  h1 { font-size:22px; margin:0 0 8px; letter-spacing:-0.01em; }
+  p { margin:0 0 24px; color:var(--slate); line-height:1.5; font-size:14px; }
+  button { font:600 14px system-ui; padding:12px 24px; border:0; border-radius:999px; cursor:pointer; color:var(--ink);
+           background:var(--canvas); box-shadow: 4px 4px 10px #D1D5DE, -4px -4px 10px #FFFFFF; }
+  button:active { box-shadow: inset 3px 3px 6px #BAC0CD, inset -3px -3px 6px #FFFFFF; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="dot">&#9676;</div>
+    <h1>You're offline</h1>
+    <p>Atelier Noir needs a connection to show fresh bakes and open appointment slots. Reconnect and try again.</p>
+    <button onclick="location.reload()">Try again</button>
+  </div>
+</body>
+</html>
