@@ -1,17 +1,18 @@
 import type { Metadata, Viewport } from 'next'
-import { Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google'
+import { Fredoka, Gaegu, Nunito } from 'next/font/google'
 import './globals.css'
 import { BRAND } from '@/lib/config'
 import { CartProvider } from '@/components/CartProvider'
 import Header from '@/components/Header'
 import RegisterSW from '@/components/RegisterSW'
 
-const space = Space_Grotesk({ subsets: ['latin'], variable: '--font-space', display: 'swap' })
-const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta', display: 'swap' })
+const display = Fredoka({ subsets: ['latin'], variable: '--font-display', display: 'swap' })
+const body = Nunito({ subsets: ['latin'], variable: '--font-body', display: 'swap' })
+const hand = Gaegu({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-hand', display: 'swap' })
 
 export const metadata: Metadata = {
   title: { default: `${BRAND} — Bakery & Nail Studio`, template: `%s · ${BRAND}` },
-  description: 'Artisanal baked goods and haute nail art, ordered and booked in one place.',
+  description: 'Fresh bakes and nail art, ordered and booked in one place.',
   applicationName: BRAND,
   manifest: '/manifest.webmanifest',
   appleWebApp: { capable: true, title: BRAND, statusBarStyle: 'default' },
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#ECEEF2',
+  themeColor: '#F6F4EF',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -27,7 +28,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${space.variable} ${jakarta.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable} ${hand.variable}`}>
       <body className="min-h-screen">
         <CartProvider>
           <Header />

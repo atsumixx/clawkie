@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Box, LogOut, User } from 'lucide-react'
+import { LogOut, User } from 'lucide-react'
 import { BRAND } from '@/lib/config'
 import { getSessionProfile } from '@/lib/auth'
 import { signOut } from '@/app/actions/auth'
@@ -12,13 +12,10 @@ export default async function Header() {
   const isAdmin = profile?.role === 'admin'
   return (
     <>
-      <header className="pt-safe fixed inset-x-0 top-0 z-40 bg-canvas/90 backdrop-blur-xl">
+      <header className="pt-safe fixed inset-x-0 top-0 z-40 border-b-2 border-ink bg-canvas/90 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-4 px-gutter md:px-gutter-desktop">
-          <Link href="/" className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-canvas shadow-neo-btn">
-              <Box size={18} />
-            </span>
-            <span className="font-display text-headline-sm leading-none">{BRAND}</span>
+          <Link href="/" aria-label={BRAND} className="flex items-center">
+            <span className="font-hand text-[34px] font-bold lowercase leading-none">{BRAND}</span>
           </Link>
           <NavLinks isAdmin={isAdmin} />
           <div className="flex items-center gap-3">

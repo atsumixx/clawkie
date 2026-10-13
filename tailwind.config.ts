@@ -1,47 +1,57 @@
 import type { Config } from 'tailwindcss'
 
+// clawkie — flat "sticker & doodle" system taken from the Cookie Cart / Clawsette posts:
+// off-white paper, near-black ink, chunky outlines, hard offset shadows, hand-drawn type.
+const INK = '#1F1F1F'
+
 const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        canvas: '#ECEEF2',
-        ink: '#121316',
-        slate: '#636874',
+        canvas: '#F6F4EF', // paper
+        ink: INK,          // cow-spot black
+        slate: '#6B6862',  // secondary text (the grey "EACH / BOX OF 6" labels)
         hi: '#FFFFFF',
-        shade: '#D1D5DE',
-        deep: '#BAC0CD',
-        danger: '#ba1a1a',
-        'danger-soft': '#ffdad6',
+        shade: '#E4E1DA',
+        deep: '#B8B3A9',
+        cream: '#FBF4E4',  // Valentine's post background
+        berry: '#7B2D3B',  // Valentine's post accent — use sparingly
+        danger: '#7B2D3B',
+        'danger-soft': '#F3DDE0',
       },
-      borderRadius: { DEFAULT: '1rem', lg: '2rem', xl: '3rem', full: '9999px' },
+      borderRadius: { DEFAULT: '1rem', lg: '1.75rem', xl: '3rem', full: '9999px' },
       spacing: { gutter: '1rem', 'gutter-desktop': '2rem', 'space-xs': '0.25rem', 'space-sm': '0.5rem', 'space-md': '1rem', 'space-lg': '1.5rem', 'space-xl': '2.5rem' },
       fontFamily: {
-        display: ['var(--font-space)', 'system-ui', 'sans-serif'],
-        body: ['var(--font-jakarta)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'ui-rounded', 'system-ui', 'sans-serif'],
+        body: ['var(--font-body)', 'system-ui', 'sans-serif'],
+        hand: ['var(--font-hand)', 'ui-rounded', 'cursive'],
       },
       fontSize: {
-        'label-sm': ['10px', { lineHeight: '12px', letterSpacing: '0.08em', fontWeight: '700' }],
-        'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.06em', fontWeight: '600' }],
-        'label-lg': ['14px', { lineHeight: '18px', letterSpacing: '0.04em', fontWeight: '600' }],
-        'headline-sm': ['18px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '500' }],
-        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.01em', fontWeight: '500' }],
-        'headline-lg-mobile': ['24px', { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '600' }],
-        'headline-lg': ['32px', { lineHeight: '40px', letterSpacing: '-0.02em', fontWeight: '600' }],
-        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '600' }],
-        'display-lg': ['48px', { lineHeight: '54px', letterSpacing: '-0.03em', fontWeight: '600' }],
-        'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '-0.01em' }],
-        'body-md': ['14px', { lineHeight: '20px' }],
-        'body-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.01em' }],
+        'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.06em', fontWeight: '600' }],
+        'label-md': ['13px', { lineHeight: '16px', letterSpacing: '0.04em', fontWeight: '600' }],
+        'label-lg': ['15px', { lineHeight: '18px', letterSpacing: '0.02em', fontWeight: '600' }],
+        'headline-sm': ['19px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '600' }],
+        'headline-md': ['23px', { lineHeight: '28px', letterSpacing: '0em', fontWeight: '600' }],
+        'headline-lg-mobile': ['26px', { lineHeight: '32px', letterSpacing: '0em', fontWeight: '600' }],
+        'headline-lg': ['34px', { lineHeight: '40px', letterSpacing: '0em', fontWeight: '600' }],
+        'display-lg-mobile': ['36px', { lineHeight: '42px', letterSpacing: '0em', fontWeight: '700' }],
+        'display-lg': ['54px', { lineHeight: '60px', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'body-lg': ['17px', { lineHeight: '25px' }],
+        'body-md': ['15px', { lineHeight: '22px' }],
+        'body-sm': ['13px', { lineHeight: '18px' }],
       },
+      // Same token names as before, so no component has to change.
+      // Ring (0 0 0 2px) = the outline, second layer = hard offset "sticker" shadow.
       boxShadow: {
-        'neo-raised': '6px 6px 14px #D1D5DE, -6px -6px 14px #FFFFFF',
-        'neo-float': '12px 12px 24px #BAC0CD, -12px -12px 24px #FFFFFF',
-        'neo-inset': 'inset 4px 4px 8px #BAC0CD, inset -4px -4px 8px #FFFFFF',
-        'neo-pill': '3px 3px 6px #D1D5DE, -3px -3px 6px #FFFFFF',
-        'neo-pill-inset': 'inset 3px 3px 6px #BAC0CD, inset -3px -3px 6px #FFFFFF',
-        'neo-btn': '4px 4px 10px #D1D5DE, -4px -4px 10px #FFFFFF',
-        'neo-ink': '4px 6px 16px rgba(18, 19, 22, 0.25)',
+        'neo-raised': `0 0 0 2px ${INK}, 5px 5px 0 2px ${INK}`,
+        'neo-float': `0 0 0 2px ${INK}, 8px 8px 0 2px ${INK}`,
+        'neo-inset': `0 0 0 2px ${INK}, inset 3px 3px 0 #E4E1DA`,
+        'neo-pill': `0 0 0 1.5px ${INK}, 2px 2px 0 1.5px ${INK}`,
+        'neo-pill-inset': `0 0 0 1.5px ${INK}, inset 2px 2px 0 #E4E1DA`,
+        'neo-btn': `0 0 0 2px ${INK}, 3px 3px 0 2px ${INK}`,
+        'neo-press': `0 0 0 2px ${INK}, 0 0 0 2px ${INK}`,
+        'neo-ink': `0 0 0 2px ${INK}, 4px 4px 0 2px #8B8780`,
       },
     },
   },

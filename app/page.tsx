@@ -1,5 +1,6 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Croissant, Sparkles } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { money } from '@/lib/format'
 import type { Product, Service } from '@/lib/types'
@@ -16,22 +17,32 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col gap-10">
-      <section className="flex flex-col gap-3">
-        <h1 className="font-display text-display-lg-mobile md:text-display-lg">Bread at dawn.<br />Nails by appointment.</h1>
-        <p className="max-w-xl text-body-lg text-slate">One atelier, two crafts. Order from today’s oven or reserve a seat at the studio.</p>
+      {/* Hero: the cow-spot banner with a sticker card on top */}
+      <section className="neo-card relative overflow-hidden">
+        <div aria-hidden className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/brand/cow-banner.jpg')" }} />
+        <div className="relative flex justify-center px-4 py-12 md:py-20">
+          <div className="neo-float flex max-w-xl flex-col gap-3 px-6 py-8 text-center md:px-10">
+            <h1 className="outline-text font-display text-display-lg-mobile md:text-display-lg">Made fresh daily.<br />Nails by appointment.</h1>
+            <p className="font-hand text-[21px] leading-6 text-slate">One little shop, two crafts. Order today’s bake or reserve a seat at the studio.</p>
+          </div>
+        </div>
       </section>
 
       <section className="grid gap-6 md:grid-cols-2">
-        <Link href="/bakery" className="neo-card group flex flex-col gap-6 p-6 transition active:shadow-neo-inset">
-          <span className="flex h-14 w-14 items-center justify-center rounded-full shadow-neo-btn"><Croissant /></span>
+        <Link href="/bakery" className="neo-card group flex flex-col gap-6 p-6 transition active:translate-x-[3px] active:translate-y-[3px] active:shadow-neo-press">
+          <span className="flex h-24 w-24 items-center justify-center rounded-full shadow-neo-inset">
+            <Image src="/brand/cookie-cart-logo.png" alt="" width={480} height={445} className="h-16 w-16 object-contain" />
+          </span>
           <div>
             <h2 className="font-display text-headline-lg-mobile">Artisanal Bakery</h2>
             <p className="mt-1 text-body-md text-slate">Sourdough, laminated pastry and specialty bakes. Pickup or local delivery.</p>
           </div>
           <span className="neo-btn self-start">Order now <ArrowRight size={16} /></span>
         </Link>
-        <Link href="/salon" className="neo-card group flex flex-col gap-6 p-6 transition active:shadow-neo-inset">
-          <span className="flex h-14 w-14 items-center justify-center rounded-full shadow-neo-btn"><Sparkles /></span>
+        <Link href="/salon" className="neo-card group flex flex-col gap-6 p-6 transition active:translate-x-[3px] active:translate-y-[3px] active:shadow-neo-press">
+          <span className="flex h-24 w-24 items-center justify-center rounded-full shadow-neo-inset">
+            <Image src="/brand/clawsette-logo.png" alt="" width={480} height={392} className="h-16 w-16 object-contain" />
+          </span>
           <div>
             <h2 className="font-display text-headline-lg-mobile">Nail Studio</h2>
             <p className="mt-1 text-body-md text-slate">Minimalist nail art, sculpted gel and cuticle care. Pick a service, an artist, a time.</p>
@@ -44,7 +55,7 @@ export default async function Home() {
         <section className="flex flex-col gap-4">
           <div className="flex items-end justify-between">
             <h2 className="font-display text-headline-md">Fresh from the oven</h2>
-            <Link href="/bakery" className="font-display text-label-md text-slate underline underline-offset-4">All bakes</Link>
+            <Link href="/bakery" className="font-hand text-[20px] font-bold text-slate underline underline-offset-4">All bakes</Link>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {(products as Product[]).map((p) => (
@@ -64,7 +75,7 @@ export default async function Home() {
         <section className="flex flex-col gap-4">
           <div className="flex items-end justify-between">
             <h2 className="font-display text-headline-md">At the studio</h2>
-            <Link href="/salon" className="font-display text-label-md text-slate underline underline-offset-4">All services</Link>
+            <Link href="/salon" className="font-hand text-[20px] font-bold text-slate underline underline-offset-4">All services</Link>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {(services as Service[]).map((s) => (

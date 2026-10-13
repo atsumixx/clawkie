@@ -1,15 +1,18 @@
 'use client'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import { login, signup, type AuthState } from '@/app/actions/auth'
+import { NewPasswordFields, PasswordInput } from './PasswordFields'
 
-function Submit({ label }: { label: string }) {
+function Submit({ label, disabled }: { label: string; disabled?: boolean }) {
   const { pending } = useFormStatus()
-  return <button className="neo-btn-ink w-full" disabled={pending}>{pending ? 'One moment…' : label}</button>
+  return <button className="neo-btn-ink w-full" disabled={pending || disabled}>{pending ? 'One moment…' : label}</button>
 }
 
 export default function AuthForm({ mode, next }: { mode: 'login' | 'signup'; next: string }) {
   const [state, action] = useFormState<AuthState, FormData>(mode === 'login' ? login : signup, {})
+  const [pwOk, setPwOk] = useState(false)
   const isLogin = mode === 'login'
   const q = next && next !== '/dashboard' ? `?next=${encodeURIComponent(next)}` : ''
   return (
@@ -26,13 +29,20 @@ export default function AuthForm({ mode, next }: { mode: 'login' | 'signup'; nex
           )}
           <div><label className="neo-label" htmlFor="email">Email</label>
             <input id="email" name="email" type="email" required autoComplete="email" className="neo-input" /></div>
-          <div><label className="neo-label" htmlFor="password">Password</label>
-            <input id="password" name="password" type="password" required minLength={isLogin ? undefined : 8}
-              autoComplete={isLogin ? 'current-password' : 'new-password'} className="neo-input" /></div>
+          {isLogin ? (
+            <div>
+              <PasswordInput id="password" name="password" label="Password" autoComplete="current-password" />
+              <Link href="/forgot-password" className="mt-2 block px-1 text-right text-body-sm text-slate underline underline-offset-4">
+                Forgot password?
+              </Link>
+            </div>
+          ) : (
+            <NewPasswordFields onValid={setPwOk} />
+          )}
 
           {state.error && <p role="alert" className="neo-inset rounded-2xl px-4 py-3 text-body-sm text-danger">{state.error}</p>}
           {state.message && <p role="status" className="neo-inset rounded-2xl px-4 py-3 text-body-sm">{state.message}</p>}
-          <Submit label={isLogin ? 'Sign in' : 'Create account'} />
+          <Submit label={isLogin ? 'Sign in' : 'Create account'} disabled={!isLogin && !pwOk} />
         </form>
 
         <p className="mt-6 text-center text-body-md text-slate">

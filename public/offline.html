@@ -3,29 +3,29 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#ECEEF2" />
-<title>Offline · Atelier Noir</title>
+<meta name="theme-color" content="#F6F4EF" />
+<title>Offline · clawkie</title>
 <style>
-  :root { --canvas:#ECEEF2; --ink:#121316; --slate:#636874; }
+  :root { --paper:#F6F4EF; --ink:#1F1F1F; --slate:#6B6862; }
   * { box-sizing: border-box; }
-  body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--canvas); color:var(--ink);
-         font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; padding:24px; }
-  .card { max-width:360px; width:100%; padding:36px 28px; border-radius:32px; text-align:center; background:var(--canvas);
-          box-shadow: 12px 12px 24px #BAC0CD, -12px -12px 24px #FFFFFF; }
-  .dot { width:64px; height:64px; margin:0 auto 20px; border-radius:50%; display:grid; place-items:center;
-         box-shadow: inset 4px 4px 8px #BAC0CD, inset -4px -4px 8px #FFFFFF; font-size:26px; }
-  h1 { font-size:22px; margin:0 0 8px; letter-spacing:-0.01em; }
-  p { margin:0 0 24px; color:var(--slate); line-height:1.5; font-size:14px; }
-  button { font:600 14px system-ui; padding:12px 24px; border:0; border-radius:999px; cursor:pointer; color:var(--ink);
-           background:var(--canvas); box-shadow: 4px 4px 10px #D1D5DE, -4px -4px 10px #FFFFFF; }
-  button:active { box-shadow: inset 3px 3px 6px #BAC0CD, inset -3px -3px 6px #FFFFFF; }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--paper); color:var(--ink);
+         font-family: ui-rounded, 'Arial Rounded MT Bold', system-ui, -apple-system, 'Segoe UI', sans-serif; padding:24px; }
+  .card { max-width:360px; width:100%; padding:36px 28px; border-radius:28px; text-align:center; background:#fff;
+          box-shadow: 0 0 0 2px var(--ink), 8px 8px 0 2px var(--ink); }
+  .dot { width:64px; height:64px; margin:0 auto 20px; border-radius:50%; display:grid; place-items:center; background:var(--paper);
+         box-shadow: 0 0 0 2px var(--ink), inset 3px 3px 0 #E4E1DA; font-size:26px; }
+  h1 { font-size:24px; margin:0 0 8px; }
+  p { margin:0 0 24px; color:var(--slate); line-height:1.5; font-size:15px; }
+  button { font:600 15px ui-rounded, system-ui; padding:12px 24px; border:0; border-radius:999px; cursor:pointer; color:var(--ink);
+           background:#fff; box-shadow: 0 0 0 2px var(--ink), 3px 3px 0 2px var(--ink); }
+  button:active { transform: translate(3px,3px); box-shadow: 0 0 0 2px var(--ink); }
 </style>
 </head>
 <body>
   <div class="card">
     <div class="dot">&#9676;</div>
     <h1>You're offline</h1>
-    <p>Atelier Noir needs a connection to show fresh bakes and open appointment slots. Reconnect and try again.</p>
+    <p>clawkie needs a connection to show fresh bakes and open appointment slots. Reconnect and try again.</p>
     <button onclick="location.reload()">Try again</button>
   </div>
 </body>

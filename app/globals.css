@@ -4,9 +4,14 @@
 
 @layer base {
   html { -webkit-tap-highlight-color: transparent; }
-  body { @apply bg-canvas text-ink font-body text-body-md antialiased; overscroll-behavior-y: none; }
-  :focus-visible { outline: 2px solid #121316; outline-offset: 3px; border-radius: 12px; }
-  ::selection { background: #121316; color: #fff; }
+  body {
+    @apply bg-canvas text-ink font-body text-body-md antialiased;
+    overscroll-behavior-y: none;
+    /* faint paper grain, like the textured post backgrounds */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .12 0 0 0 0 .12 0 0 0 0 .12 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  :focus-visible { outline: 3px solid #1F1F1F; outline-offset: 3px; border-radius: 14px; }
+  ::selection { background: #1F1F1F; color: #fff; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { scrollbar-width: none; }
   .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
@@ -14,23 +19,25 @@
 }
 
 @layer components {
-  /* Convex surfaces */
-  .neo-card { @apply rounded-lg bg-canvas shadow-neo-raised; }
-  .neo-float { @apply rounded-lg bg-canvas shadow-neo-float; }
-  /* Concave surfaces */
+  /* Sticker surfaces: white, outlined, hard offset shadow */
+  .neo-card { @apply rounded-lg bg-hi shadow-neo-raised; }
+  .neo-float { @apply rounded-lg bg-hi shadow-neo-float; }
+  /* Recessed paper wells (fields, trays, image frames) */
   .neo-inset { @apply bg-canvas shadow-neo-inset; }
   /* Chips / badges */
-  .neo-chip { @apply inline-flex items-center gap-1.5 rounded-full bg-canvas px-3 py-1.5 font-display text-label-sm text-slate shadow-neo-pill; }
+  .neo-chip { @apply inline-flex items-center gap-1.5 rounded-full bg-hi px-3 py-1.5 font-display text-label-sm text-slate shadow-neo-pill; }
   .neo-chip-inset { @apply inline-flex items-center gap-1.5 rounded-full bg-canvas px-3 py-1.5 font-display text-label-sm text-slate shadow-neo-pill-inset; }
-  /* Buttons */
-  .neo-btn { @apply inline-flex items-center justify-center gap-2 rounded-full bg-canvas px-5 py-3 font-display text-label-lg text-ink shadow-neo-btn transition duration-100 active:scale-[0.98] active:shadow-neo-pill-inset disabled:pointer-events-none disabled:opacity-40; }
-  .neo-btn-ink { @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-3.5 font-display text-label-lg text-hi shadow-neo-ink transition duration-100 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-40; }
+  /* Buttons press down into their shadow */
+  .neo-btn { @apply inline-flex items-center justify-center gap-2 rounded-full bg-hi px-5 py-3 font-display text-label-lg text-ink shadow-neo-btn transition duration-100 active:translate-x-[3px] active:translate-y-[3px] active:shadow-neo-press disabled:pointer-events-none disabled:opacity-40; }
+  .neo-btn-ink { @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-3.5 font-display text-label-lg text-hi shadow-neo-ink transition duration-100 active:translate-x-[3px] active:translate-y-[3px] active:shadow-neo-press disabled:pointer-events-none disabled:opacity-40; }
   .neo-btn-sm { @apply px-4 py-2 text-label-md; }
-  .neo-icon-btn { @apply inline-flex h-10 w-10 items-center justify-center rounded-full bg-canvas text-slate shadow-neo-btn transition duration-100 hover:text-ink active:scale-[0.97] active:shadow-neo-pill-inset disabled:pointer-events-none disabled:opacity-40; }
-  /* Selected / pressed state for chips, tiles & segmented thumbs */
-  .is-pressed { @apply shadow-neo-pill-inset text-ink !important; }
+  .neo-icon-btn { @apply inline-flex h-10 w-10 items-center justify-center rounded-full bg-hi text-ink shadow-neo-btn transition duration-100 active:translate-x-[2px] active:translate-y-[2px] active:shadow-neo-press disabled:pointer-events-none disabled:opacity-40; }
+  /* Selected / pressed state: filled ink, like the black blob on the posts */
+  .is-pressed { @apply bg-ink text-hi shadow-neo-pill !important; }
   /* Fields */
-  .neo-input { @apply w-full rounded-2xl bg-canvas px-4 py-3 text-body-md text-ink shadow-neo-inset outline-none placeholder:text-slate focus:ring-1 focus:ring-slate; }
+  .neo-input { @apply w-full rounded-2xl bg-hi px-4 py-3 text-body-md text-ink shadow-neo-inset outline-none placeholder:text-slate focus:shadow-neo-btn; }
   .neo-label { @apply mb-1.5 block px-1 font-display text-label-sm uppercase text-slate; }
   .neo-heading { @apply font-display; }
+  /* Outlined headline, as in "Cookie Guide!" and "MADE FRESH DAILY!" */
+  .outline-text { color: #fff; -webkit-text-stroke: 2.5px #1F1F1F; paint-order: stroke fill; text-shadow: 3px 3px 0 #1F1F1F; }
 }

@@ -1,4 +1,4 @@
-export const BRAND = 'Atelier Noir'
+export const BRAND = 'clawkie'
 export const STUDIO_TZ = process.env.NEXT_PUBLIC_STUDIO_TZ || 'Asia/Manila'
 export const CURRENCY = process.env.NEXT_PUBLIC_CURRENCY || 'USD'
 

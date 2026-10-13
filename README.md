@@ -1,4 +1,4 @@
-# Atelier Noir — Bakery & Nail Studio PWA
+# clawkie — Bakery & Nail Studio PWA
 
 Next.js 14 (App Router) · Tailwind CSS · Supabase (Postgres, Auth, RLS) · Vercel.
 Monochrome neomorphic UI built from the supplied Stitch designs ("Tactile Monochrome" design system).
@@ -8,6 +8,8 @@ Monochrome neomorphic UI built from the supplied Stitch designs ("Tactile Monoch
 2. SQL Editor → run `supabase/schema.sql`, then (optional) `supabase/seed.sql`.
 3. Authentication → Providers → Email: enabled. For quick testing you can turn off "Confirm email".
    Authentication → URL Configuration: add `http://localhost:3000/auth/callback` and your Vercel URL + `/auth/callback`.
+   Email confirmation uses a verification code; password recovery sends a link to choose a new password.
+   Passwords must be at least 8 characters and include at least two of: mixed case, a number, or a symbol.
 4. Sign up in the app, then make yourself the owner (SQL editor):
    ```sql
    update public.profiles set role = 'admin' where id = (select id from auth.users where email = 'you@example.com');
